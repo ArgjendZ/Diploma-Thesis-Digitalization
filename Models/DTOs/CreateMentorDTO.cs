@@ -1,8 +1,7 @@
-﻿namespace DiplomaThesisDigitalization.Models.Entities
+﻿namespace DiplomaThesisDigitalization.Models.DTOs
 {
-    public class User
+    public class CreateMentorDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DOB { get; set; }
@@ -12,6 +11,10 @@
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Role { get; set; }
+        public string Status { get; set; }
+        public string Availability { get; set; }
+        public string Department { get; set; }
+        public string Field { get; set; }
+
     }
 }
- 
