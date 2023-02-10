@@ -14,7 +14,7 @@ namespace DiplomaThesisDigitalization.Controllers
         public FacultiesController(IFacultyService facultyService)
         {
             _facultyService = facultyService;
-        }
+        } 
 
         [HttpPost("faculty")]
         public async Task<IActionResult> CreateFaculty(string facultyName)
