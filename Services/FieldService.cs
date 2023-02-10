@@ -13,7 +13,7 @@ namespace DiplomaThesisDigitalization.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task CreateField(string fieldName)
+        public async Task CreateField(string fieldName, int departmentId)
         {
             var repository = _unitOfWork.Repository<Field>();
             
@@ -22,7 +22,7 @@ namespace DiplomaThesisDigitalization.Services
             {
                 throw new ArgumentException("Fusha me kete emer ekziston!");
             }
-            Field field = new Field() { FieldName = fieldName };
+            Field field = new Field() { FieldName = fieldName, DepartmentId = departmentId };
             await repository.CreateAsync(field);
             await _unitOfWork.CompleteAsync();
         }

@@ -17,12 +17,6 @@ namespace DiplomaThesisDigitalization.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpPost("add/administrator")]
-        public async Task<ActionResult<User>> CreateAdmin([FromQuery] CreateAdminDTO adminDTO)
-        {
-            await _authenticationService.AddAdmin(adminDTO);
-            return Ok();
-        }
 
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login([FromQuery] LoginDTO login)

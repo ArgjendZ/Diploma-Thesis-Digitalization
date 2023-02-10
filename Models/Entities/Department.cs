@@ -17,5 +17,6 @@ namespace DiplomaThesisDigitalization.Models.Entities
         public Faculty Faculty { get; set; }
         public virtual ICollection<Mentor> Mentors { get; set; }
         public ICollection<Student> Students { get; set; }
+        public ICollection<Field> Fields { get; set; }
     }
 }

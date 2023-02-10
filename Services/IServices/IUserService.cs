@@ -1,4 +1,5 @@
-﻿using DiplomaThesisDigitalization.Models.Entities;
+﻿using DiplomaThesisDigitalization.Models.DTOs;
+using DiplomaThesisDigitalization.Models.Entities;
 
 namespace DiplomaThesisDigitalization.Services.IServices
 {
@@ -7,5 +8,11 @@ namespace DiplomaThesisDigitalization.Services.IServices
         Task<List<User>> GetAllUsers();
         Task<User> GetUserFromId(int userId);
         Task<User> GetUserFromEmail(string userEmail);
+        Task AddStudent(CreateStudentDTO studentDTO);
+        Task DeleteStudent(int studentId);
+        Task AddMentor(CreateMentorDTO mentorDTO);
+        Task DeleteMentor(int mentorId);
+        Task AddAdmin(CreateAdminDTO adminDTO);
+        Task DeleteAdmin(int adminId);
     }
 }

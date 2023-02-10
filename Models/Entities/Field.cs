@@ -8,6 +8,8 @@
         }
         public int Id { get; set; }
         public string FieldName { get; set; }
+        public int? DepartmentId { get; set; }
+        public Department Department { get; set; }
 
         public ICollection<Student> Students { get; set; }
         public ICollection<Title> Titles { get; set; }

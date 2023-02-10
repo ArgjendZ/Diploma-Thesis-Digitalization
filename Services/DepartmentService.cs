@@ -2,6 +2,8 @@
 using DiplomaThesisDigitalization.Models.DTOs;
 using DiplomaThesisDigitalization.Models.Entities;
 using DiplomaThesisDigitalization.Services.IServices;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.Arm;
 
 namespace DiplomaThesisDigitalization.Services
 {
@@ -22,6 +24,12 @@ namespace DiplomaThesisDigitalization.Services
             {
                 throw new ArgumentException("Departamenti me kete emer ekziston!");
             }
+            var existingFaculty = _unitOfWork.Repository<Faculty>().GetById(a => a.Id == depDTO.FacultyId).FirstOrDefault();
+            if (existingFaculty == null)
+            {
+                throw new ArgumentException("Fakulteti me kete ID nuk ekziston");
+            }
+
             Department dep = new Department() 
             { 
                 Name = depDTO.Name, 
@@ -33,19 +41,31 @@ namespace DiplomaThesisDigitalization.Services
             await _unitOfWork.CompleteAsync();
         }
 
-        public Task DeleteDepartment(int departmentId)
+        public async Task DeleteDepartment(int departmentId)
         {
-            throw new NotImplementedException();
+            var repository = _unitOfWork.Repository<Department>();
+
+            var existingDepartment = repository.GetById(d => d.Id == departmentId).FirstOrDefault();
+            if(existingDepartment == null)
+            {
+                throw new ArgumentException("Departamenti me kete ID nuk ekziston");
+            }
+            repository.Delete(existingDepartment);
+            await _unitOfWork.CompleteAsync();
+        }   
+
+        public async Task<List<Department>> GetAllDepartments()
+        {
+            var repository = _unitOfWork.Repository<Department>();
+
+            return await repository.GetAll().ToListAsync();
         }
 
-        public Task<List<Department>> GetAllDepartments()
+        public async Task<List<Department>> GetDepartmentsByFaculty(int facultyId)
         {
-            throw new NotImplementedException();
-        }
+            var repository = _unitOfWork.Repository<Department>();
 
-        public Task<List<Department>> GetDepartmentsByFaculty(int facultyId)
-        {
-            throw new NotImplementedException();
+            return await repository.GetAll().Where(d => d.FacultyId == facultyId).ToListAsync();
         }
     }
 }

@@ -6,21 +6,21 @@ namespace DiplomaThesisDigitalization.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class FieldsController : ControllerBase
     {
         private readonly IFieldService _fieldService;
 
-        public AdminController(IFieldService fieldService)
+        public FieldsController(IFieldService fieldService)
         {
             _fieldService = fieldService;
         }
 
         [HttpPost("field")]
-        public async Task<IActionResult> CreateField(string fieldName)
+        public async Task<IActionResult> CreateField(string fieldName, int departmentId)
         {
             try
             {
-                await _fieldService.CreateField(fieldName);
+                await _fieldService.CreateField(fieldName, departmentId);
                 return Ok();
             }
             catch (UnauthorizedAccessException ex)
