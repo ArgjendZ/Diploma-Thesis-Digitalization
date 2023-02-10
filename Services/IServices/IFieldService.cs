@@ -4,9 +4,11 @@ namespace DiplomaThesisDigitalization.Services.IServices
 {
     public interface IFieldService
     {
-        Task<Field> GetField(int fieldId);
-        Task DeleteField(int fieldId);
-        Task<List<Mentor>> GetMentorsFromField(string fieldName);
+        Task<List<Field>> GetAllFields();
+        Task CreateField(string fieldName);
+        Task DeleteField(string fieldName);
+        Task<List<User>> GetMentorsFromField(string fieldName);
+        Task<List<User>> GetStudentsFromField(string fieldName);
 
     }
 }
