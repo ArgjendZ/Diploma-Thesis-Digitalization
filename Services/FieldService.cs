@@ -1,6 +1,7 @@
 ﻿using DiplomaThesisDigitalization.Data.UnitOfWork;
 using DiplomaThesisDigitalization.Models.Entities;
 using DiplomaThesisDigitalization.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiplomaThesisDigitalization.Services
 {
@@ -26,14 +27,24 @@ namespace DiplomaThesisDigitalization.Services
             await _unitOfWork.CompleteAsync();
         }
 
-        public Task DeleteField(string fieldName)
+        public async Task DeleteField(string fieldName)
         {
-            throw new NotImplementedException();
+            var repository = _unitOfWork.Repository<Field>();
+
+            var existingField = repository.GetAll().Where(a => a.FieldName == fieldName).FirstOrDefault();
+            if (existingField == null)
+            {
+                throw new ArgumentException("Fusha me kete emer nuk ekziston!");
+            }
+            repository.Delete(existingField);
+            await _unitOfWork.CompleteAsync();
         }
 
-        public Task<List<Field>> GetAllFields()
+        public async Task<List<Field>> GetAllFields()
         {
-            throw new NotImplementedException();
+            var repository = _unitOfWork.Repository<Field>();
+
+            return await repository.GetAll().ToListAsync();
         }
 
         public Task<List<User>> GetMentorsFromField(string fieldName)

@@ -19,6 +19,11 @@ namespace DiplomaThesisDigitalization.Data.UnitOfWork
             return affectedRows > 0;
         }
 
+        public async Task SaveAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
         public IThesisRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
             if (_repositories == null) _repositories = new Hashtable();

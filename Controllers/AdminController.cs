@@ -16,11 +16,39 @@ namespace DiplomaThesisDigitalization.Controllers
         }
 
         [HttpPost("field")]
-        public async Task<IActionResult> PostComment(string fieldName)
+        public async Task<IActionResult> CreateField(string fieldName)
         {
             try
             {
                 await _fieldService.CreateField(fieldName);
+                return Ok();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+
+        [HttpGet("fields")]
+        public async Task<IActionResult> GetAllFields()
+        {
+            try
+            {
+                var fields = await _fieldService.GetAllFields();
+                return Ok(fields);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+
+        [HttpDelete("field")]
+        public async Task<IActionResult> DeleteField(string fieldName)
+        {
+            try
+            {
+                await _fieldService.DeleteField(fieldName);
                 return Ok();
             }
             catch (UnauthorizedAccessException ex)

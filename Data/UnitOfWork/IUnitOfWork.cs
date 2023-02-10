@@ -6,5 +6,6 @@ namespace DiplomaThesisDigitalization.Data.UnitOfWork
     {
         public IThesisRepository<TEntity> Repository<TEntity>() where TEntity : class;
         Task<bool> CompleteAsync();
+        Task SaveAsync();
     }
 }
