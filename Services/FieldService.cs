@@ -53,8 +53,9 @@ namespace DiplomaThesisDigitalization.Services
         }
 
         public Task<List<User>> GetStudentsFromField(string fieldName)
-        {
+        { 
             throw new NotImplementedException();
         }
     }
 }
+ 
