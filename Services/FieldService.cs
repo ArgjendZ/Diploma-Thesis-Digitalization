@@ -47,14 +47,48 @@ namespace DiplomaThesisDigitalization.Services
             return await repository.GetAll().ToListAsync();
         }
 
-        public Task<List<User>> GetMentorsFromField(string fieldName)
+        public async Task<List<User>> GetMentorsFromField(string fieldName)
         {
-            throw new NotImplementedException();
+            List<User> users= new List<User>();
+
+            var field = await _unitOfWork.Repository<Field>().GetById(a => a.FieldName == fieldName).FirstOrDefaultAsync();
+
+            if (field == null)
+            {
+                throw new Exception("Fusha me kete emer nuk ekziston");
+            }
+
+            var mentors = _unitOfWork.Repository<Mentor>().GetAll().Where(a => a.Fields.Contains(field)).ToListAsync().Result;
+
+            foreach(var ment in mentors)
+            {
+                var user = await _unitOfWork.Repository<User>().GetById(a => a.Id == ment.Id).FirstOrDefaultAsync();
+                users.Add(user);
+            }
+
+            return users;
         }
 
-        public Task<List<User>> GetStudentsFromField(string fieldName)
+        public async Task<List<User>> GetStudentsFromField(string fieldName)
         {
-            throw new NotImplementedException();
+            List<User> users = new List<User>();
+
+            var field = await _unitOfWork.Repository<Field>().GetById(a => a.FieldName == fieldName).FirstOrDefaultAsync();
+
+            if (field == null)
+            {
+                throw new Exception("Fusha me kete emer nuk ekziston");
+            }
+
+            var students = _unitOfWork.Repository<Student>().GetAll().Where(a => a.FieldId == field.Id).ToListAsync().Result;
+
+            foreach (var stud in students)
+            {
+                var user = await _unitOfWork.Repository<User>().GetById(a => a.Id == stud.Id).FirstOrDefaultAsync();
+                users.Add(user);
+            }
+
+            return users;
         }
     }
 }

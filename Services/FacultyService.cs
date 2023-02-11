@@ -18,7 +18,7 @@ namespace DiplomaThesisDigitalization.Services
             var repository = _unitOfWork.Repository<Faculty>();
 
             var existingFaculty = repository.GetAll().Where(a => a.Name == facultyName).FirstOrDefault();
-            if (existingFaculty != null) 
+            if (existingFaculty != null)
             {
                 throw new ArgumentException("Fakulteti me kete emer ekziston!");
             }

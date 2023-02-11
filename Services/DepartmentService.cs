@@ -67,5 +67,5 @@ namespace DiplomaThesisDigitalization.Services
 
             return await repository.GetAll().Where(d => d.FacultyId == facultyId).ToListAsync();
         }
-    } 
+    }
 }
