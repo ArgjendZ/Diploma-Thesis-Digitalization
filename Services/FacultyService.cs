@@ -2,7 +2,7 @@
 using DiplomaThesisDigitalization.Models.Entities;
 using DiplomaThesisDigitalization.Services.IServices;
 using Microsoft.EntityFrameworkCore;
-
+ 
 namespace DiplomaThesisDigitalization.Services
 {
     public class FacultyService : IFacultyService
