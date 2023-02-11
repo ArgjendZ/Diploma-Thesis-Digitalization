@@ -54,7 +54,7 @@ namespace DiplomaThesisDigitalization.Services
                 Phone = adminDTO.Phone,
                 Address = adminDTO.Address,
                 Role = "Admin"
-            };
+            }; 
 
             await _unitOfWork.Repository<User>().CreateAsync(user);
             await _unitOfWork.SaveAsync();
