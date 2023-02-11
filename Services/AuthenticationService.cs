@@ -21,7 +21,7 @@ namespace DiplomaThesisDigitalization.Services
             _jwtHelper = jwtHelper;
         }
 
-        
+         
 
         public async Task<string> Login([FromQuery] LoginDTO loginDTO)
         {

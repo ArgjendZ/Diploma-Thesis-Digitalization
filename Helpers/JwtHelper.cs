@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DiplomaThesisDigitalization.Helpers
 {
-    public class JwtHelper
+    public class JwtHelper 
     {
         private string secureKey = "my Very Secure Key";
         public string Generate(int id)
