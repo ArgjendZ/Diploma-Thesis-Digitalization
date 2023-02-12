@@ -31,6 +31,7 @@ namespace DiplomaThesisDigitalization.Controllers
             {
                 return BadRequest("No logged user");
             }
+
             await _administratorService.ApproveDiplomaThesisApplication(jwt, thesisApplicationId);
             return Ok();
         }

@@ -21,7 +21,6 @@ namespace DiplomaThesisDigitalization.Services
             _jwtHelper = jwtHelper;
         }
 
-         
 
         public async Task<string> Login([FromQuery] LoginDTO loginDTO)
         {
@@ -44,8 +43,6 @@ namespace DiplomaThesisDigitalization.Services
             int userId = int.Parse(token.Issuer);
             return await _userService.GetUserFromId(userId);
         }
-
-
 
     }
 }

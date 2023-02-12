@@ -15,7 +15,7 @@ namespace DiplomaThesisDigitalization.Controllers
             _fieldService = fieldService;
         }
 
-        [HttpPost("field")]
+        [HttpPost]
         public async Task<IActionResult> CreateField(string fieldName, int departmentId)
         {
             try
@@ -29,7 +29,7 @@ namespace DiplomaThesisDigitalization.Controllers
             }
         }
 
-        [HttpGet("fields")]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllFields()
         {
             try
@@ -43,13 +43,40 @@ namespace DiplomaThesisDigitalization.Controllers
             }
         }
 
-        [HttpDelete("field")]
+        [HttpDelete("{fieldName}")]
         public async Task<IActionResult> DeleteField(string fieldName)
         {
             try
             {
                 await _fieldService.DeleteField(fieldName);
                 return Ok();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+        [HttpGet("{fieldName}/mentors")]
+        public async Task<IActionResult> GetMentorsFromField(string fieldName)
+        {
+            try
+            {
+                var fields = await _fieldService.GetMentorsFromField(fieldName);
+                return Ok(fields);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+
+        [HttpGet("{fieldName}/students")]
+        public async Task<IActionResult> GetStudentsFromField(string fieldName)
+        {
+            try
+            {
+                var fields = await _fieldService.GetStudentsFromField(fieldName);
+                return Ok(fields);
             }
             catch (UnauthorizedAccessException ex)
             {
