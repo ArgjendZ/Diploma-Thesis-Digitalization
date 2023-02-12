@@ -8,7 +8,7 @@ namespace DiplomaThesisDigitalization.Controllers
     public class StudentController : ControllerBase
     {
         public StudentController()
-        {
+        { 
 
         }
     }
